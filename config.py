@@ -2,6 +2,7 @@ import argparse
 import sys
 import torch
 import json
+import easydict
 from multiprocessing import cpu_count
 
 global usefp16
@@ -92,30 +93,39 @@ class Config:
     @staticmethod
     def arg_parse() -> tuple:
         exe = sys.executable or "python"
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--port", type=int, default=7865, help="Listen port")
-        parser.add_argument("--pycmd", type=str, default=exe, help="Python command")
-        parser.add_argument("--colab", action="store_true", help="Launch in colab")
-        parser.add_argument(
-            "--noparallel", action="store_true", help="Disable parallel processing"
-        )
-        parser.add_argument(
-            "--noautoopen",
-            action="store_true",
-            help="Do not open in browser automatically",
-        )
-        parser.add_argument(  # Fork Feature. Paperspace integration for web UI
-            "--paperspace",
-            action="store_true",
-            help="Note that this argument just shares a gradio link for the web UI. Thus can be used on other non-local CLI systems.",
-        )
-        parser.add_argument(  # Fork Feature. Embed a CLI into the infer-web.py
-            "--is_cli",
-            action="store_true",
-            help="Use the CLI instead of setting up a gradio UI. This flag will launch an RVC text interface where you can execute functions from infer-web.py!",
-        )
-        cmd_opts = parser.parse_args()
-
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument("--port", type=int, default=7865, help="Listen port")
+        # parser.add_argument("--pycmd", type=str, default=exe, help="Python command")
+        # parser.add_argument("--colab", action="store_true", help="Launch in colab")
+        # parser.add_argument(
+        #     "--noparallel", action="store_true", help="Disable parallel processing"
+        # )
+        # parser.add_argument(
+        #     "--noautoopen",
+        #     action="store_true",
+        #     help="Do not open in browser automatically",
+        # )
+        # parser.add_argument(  # Fork Feature. Paperspace integration for web UI
+        #     "--paperspace",
+        #     action="store_true",
+        #     help="Note that this argument just shares a gradio link for the web UI. Thus can be used on other non-local CLI systems.",
+        # )
+        # parser.add_argument(  # Fork Feature. Embed a CLI into the infer-web.py
+        #     "--is_cli",
+        #     action="store_true",
+        #     help="Use the CLI instead of setting up a gradio UI. This flag will launch an RVC text interface where you can execute functions from infer-web.py!",
+        # )
+        # cmd_opts = parser.parse_args()
+        
+        cmd_opts = easydict.EasyDict({
+            "port": 7865,
+            "pycmd": exe,
+            "colab": True,
+            "noparallel": True,
+            "noautoopen": True,
+            "paperspace": True,
+            "is_cli": True
+        })
         cmd_opts.port = cmd_opts.port if 0 <= cmd_opts.port <= 65535 else 7865
 
         return (
