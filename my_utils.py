@@ -174,4 +174,3 @@ def log_mel_spectrogram(
     log_spec = torch.maximum(log_spec, log_spec.max() - 8.0)
     log_spec = (log_spec + 4.0) / 4.0
     return log_spec
-
