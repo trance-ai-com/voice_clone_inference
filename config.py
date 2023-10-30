@@ -116,16 +116,18 @@ class Config:
         #     help="Use the CLI instead of setting up a gradio UI. This flag will launch an RVC text interface where you can execute functions from infer-web.py!",
         # )
         # cmd_opts = parser.parse_args()
-        
-        cmd_opts = easydict.EasyDict({
-            "port": 7865,
-            "pycmd": exe,
-            "colab": True,
-            "noparallel": True,
-            "noautoopen": True,
-            "paperspace": True,
-            "is_cli": True
-        })
+
+        cmd_opts = easydict.EasyDict(
+            {
+                "port": 7865,
+                "pycmd": exe,
+                "colab": True,
+                "noparallel": True,
+                "noautoopen": True,
+                "paperspace": True,
+                "is_cli": True,
+            }
+        )
         cmd_opts.port = cmd_opts.port if 0 <= cmd_opts.port <= 65535 else 7865
 
         return (
