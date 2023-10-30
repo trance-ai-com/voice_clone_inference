@@ -256,10 +256,10 @@ def vc_single(
     f0_up_key = int(f0_up_key)
     try:
         if input_audio_path0 == "":
-            audio = load_audio(input_audio_path1, 16000, DoFormant, Quefrency, Timbre)
+            audio = load_audio(input_audio_path1, 16000)
 
         else:
-            audio = load_audio(input_audio_path0, 16000, DoFormant, Quefrency, Timbre)
+            audio = load_audio(input_audio_path0, 16000)
 
         audio_max = np.abs(audio).max() / 0.95
         if audio_max > 1:
