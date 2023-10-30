@@ -138,6 +138,7 @@ def load_audio(file, sr, DoFormant, Quefrency, Timbre):
                 )
             )
     except Exception as e:
+        print("stderr:", e.stderr.decode("utf8"))
         raise RuntimeError(f"Failed to load audio: {e}")
 
     if converted:
