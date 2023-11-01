@@ -25,7 +25,6 @@ from time import sleep
 
 import faiss
 import ffmpeg
-import gradio as gr
 import soundfile as sf
 from config import Config
 from fairseq import checkpoint_utils
