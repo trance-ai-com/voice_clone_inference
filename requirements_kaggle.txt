@@ -3,6 +3,7 @@ wheel
 httpx==0.23.0
 faiss-gpu
 fairseq
+praat-parselmouth
 pyworld
 ffmpeg
 ffmpeg-python
