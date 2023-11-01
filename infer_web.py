@@ -1543,42 +1543,32 @@ def execute_generator_function(genObject):
         pass
 
 
-def cli_infer(com):
+def cli_infer(model_name, source_audio_path, output_file_name, feature_index_path):
     # get VC first
-    com = cli_split_command(com)
-    model_name = com[0]
-    source_audio_path = com[1]
-    output_file_name = com[2]
-    feature_index_path = com[3]
+    # com = cli_split_command(com)
+    model_name = model_name
+    source_audio_path = source_audio_path
+    output_file_name = output_file_name
+    feature_index_path = feature_index_path
     f0_file = None  # Not Implemented Yet
 
     # Get parameters for inference
-    speaker_id = int(com[4])
-    transposition = float(com[5])
-    f0_method = com[6]
-    crepe_hop_length = int(com[7])
-    harvest_median_filter = int(com[8])
-    resample = int(com[9])
-    mix = float(com[10])
-    feature_ratio = float(com[11])
-    protection_amnt = float(com[12])
+    speaker_id = int(0)
+    transposition = float(-2)
+    f0_method = 'harvest'
+    crepe_hop_length = int(160)
+    harvest_median_filter = int(3)
+    resample = int(0)
+    mix = float(0.95)
+    feature_ratio = float(0.33)
+    protection_amnt = float(0.45)
     protect1 = 0.5
 
-    if com[14] == "False" or com[14] == "false":
-        DoFormant = False
-        Quefrency = 0.0
-        Timbre = 0.0
-        CSVutil(
-            "csvdb/formanting.csv", "w+", "formanting", DoFormant, Quefrency, Timbre
-        )
-
-    else:
-        DoFormant = True
-        Quefrency = float(com[15])
-        Timbre = float(com[16])
-        CSVutil(
-            "csvdb/formanting.csv", "w+", "formanting", DoFormant, Quefrency, Timbre
-        )
+    DoFormant = True
+    Quefrency = float(8.0)
+    Timbre = float(1.2)
+    CSVutil(
+        "csvdb/formanting.csv", "w+", "formanting", DoFormant, Quefrency, Timbre)
 
     print("Mangio-RVC-Fork Infer-CLI: Starting the inference...")
     vc_data = get_vc(model_name, protection_amnt, protect1)
@@ -1831,15 +1821,13 @@ def change_page(page):
     return 0
 
 
-def execute_command(com):
-    cli_infer(com)
+def execute_command():
+    cli_infer('niteshbetter_e90_s1890.pth','/Users/niteshreddymusukula/rvc_project/Mangio-RVC-Fork/audios/ntr_telugu_2min.mp3', "test3.wav", '/Users/niteshreddymusukula/rvc_project/Mangio-RVC-Fork/logs/added_IVF598_Flat_nprobe_1_niteshbetter_v2.index')
 
 
 def cli_navigation_loop():
-    print("give arguments ...\n")
-    command = input("%s: " % cli_current_page)
     try:
-        execute_command(command)
+        execute_command()
     except:
         print(traceback.format_exc())
 
@@ -1849,6 +1837,6 @@ if config.is_cli:
     print(
         "Welcome to the CLI version of RVC. Please read the documentation on https://github.com/Mangio621/Mangio-RVC-Fork (README.MD) to understand how to use this app.\n"
     )
-    cli_navigation_loop()
+    #cli_navigation_loop()
 
 # endregion
