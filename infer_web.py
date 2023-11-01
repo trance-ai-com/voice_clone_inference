@@ -1838,6 +1838,6 @@ if config.is_cli:
     print(
         "Welcome to the CLI version of RVC. Please read the documentation on https://github.com/Mangio621/Mangio-RVC-Fork (README.MD) to understand how to use this app.\n"
     )
-    cli_navigation_loop()
+    #cli_navigation_loop()
 
 # endregion
