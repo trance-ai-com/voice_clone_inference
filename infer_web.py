@@ -1590,23 +1590,25 @@ def cli_infer(model_name, source_audio_path, output_file_name, feature_index_pat
         protection_amnt,
         crepe_hop_length,
     )
-    if "Success." in conversion_data[0]:
-        print(
-            "Mangio-RVC-Fork Infer-CLI: Inference succeeded. Writing to %s/%s..."
-            % ("audio-outputs", output_file_name)
-        )
-        wavfile.write(
-            "%s/%s" % ("audio-outputs", output_file_name),
-            conversion_data[1][0],
-            conversion_data[1][1],
-        )
-        print(
-            "Mangio-RVC-Fork Infer-CLI: Finished! Saved output to %s/%s"
-            % ("audio-outputs", output_file_name)
-        )
-    else:
+    # raise exception if not successful
+    if "Success." not in conversion_data[0]:
         print("Mangio-RVC-Fork Infer-CLI: Inference failed. Here's the traceback: ")
         print(conversion_data[0])
+        raise Exception(f'Failed to infer {source_audio_path}')
+    print(
+            "Mangio-RVC-Fork Infer-CLI: Inference succeeded. Writing to %s/%s..."
+            % ("audio-outputs", output_file_name)
+    )
+    wavfile.write(
+        "%s/%s" % ("audio-outputs", output_file_name),
+        conversion_data[1][0],
+        conversion_data[1][1],
+    )
+    print(
+        "Mangio-RVC-Fork Infer-CLI: Finished! Saved output to %s/%s"
+        % ("audio-outputs", output_file_name)
+    )
+        
 
 
 def cli_pre_process(com):
