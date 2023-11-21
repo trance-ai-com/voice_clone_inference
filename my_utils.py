@@ -52,6 +52,7 @@ def CSVutil(file, rw, type, *args):
             csv_writer = csv.writer(fileCSVwrite, delimiter=",")
             csv_writer.writerow([stop])
 
+
 # hard-coded audio hyperparameters
 SAMPLE_RATE = 16000
 N_FFT = 400
@@ -60,18 +61,24 @@ HOP_LENGTH = 160
 CHUNK_LENGTH = 30
 N_SAMPLES = CHUNK_LENGTH * SAMPLE_RATE  # 480000 samples in a 30-second chunk
 
+
 def load_audio(file: str, sr: int = SAMPLE_RATE):
-    
     cmd = [
         "ffmpeg",
         "-nostdin",
-        "-threads", "0",
-        "-i", file,
-        "-f", "s16le",
-        "-ac", "1",
-        "-acodec", "pcm_s16le",
-        "-ar", str(sr),
-        "-"
+        "-threads",
+        "0",
+        "-i",
+        file,
+        "-f",
+        "s16le",
+        "-ac",
+        "1",
+        "-acodec",
+        "pcm_s16le",
+        "-ar",
+        str(sr),
+        "-",
     ]
     # fmt: on
     try:

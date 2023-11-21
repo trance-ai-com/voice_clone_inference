@@ -1555,7 +1555,7 @@ def cli_infer(model_name, source_audio_path, output_file_name, feature_index_pat
     # Get parameters for inference
     speaker_id = int(0)
     transposition = float(-2)
-    f0_method = 'harvest'
+    f0_method = "harvest"
     crepe_hop_length = int(160)
     harvest_median_filter = int(3)
     resample = int(0)
@@ -1567,8 +1567,7 @@ def cli_infer(model_name, source_audio_path, output_file_name, feature_index_pat
     DoFormant = True
     Quefrency = float(8.0)
     Timbre = float(1.2)
-    CSVutil(
-        "csvdb/formanting.csv", "w+", "formanting", DoFormant, Quefrency, Timbre)
+    CSVutil("csvdb/formanting.csv", "w+", "formanting", DoFormant, Quefrency, Timbre)
 
     print("Mangio-RVC-Fork Infer-CLI: Starting the inference...")
     vc_data = get_vc(model_name, protection_amnt, protect1)
@@ -1594,10 +1593,10 @@ def cli_infer(model_name, source_audio_path, output_file_name, feature_index_pat
     if "Success." not in conversion_data[0]:
         print("Mangio-RVC-Fork Infer-CLI: Inference failed. Here's the traceback: ")
         print(conversion_data[0])
-        raise Exception(f'Failed to infer {source_audio_path}')
+        raise Exception(f"Failed to infer {source_audio_path}")
     print(
-            "Mangio-RVC-Fork Infer-CLI: Inference succeeded. Writing to %s/%s..."
-            % ("audio-outputs", output_file_name)
+        "Mangio-RVC-Fork Infer-CLI: Inference succeeded. Writing to %s/%s..."
+        % ("audio-outputs", output_file_name)
     )
     wavfile.write(
         "%s/%s" % ("audio-outputs", output_file_name),
@@ -1608,7 +1607,6 @@ def cli_infer(model_name, source_audio_path, output_file_name, feature_index_pat
         "Mangio-RVC-Fork Infer-CLI: Finished! Saved output to %s/%s"
         % ("audio-outputs", output_file_name)
     )
-        
 
 
 def cli_pre_process(com):
@@ -1824,7 +1822,12 @@ def change_page(page):
 
 
 def execute_command():
-    cli_infer('niteshbetter_e90_s1890.pth','/Users/niteshreddymusukula/rvc_project/Mangio-RVC-Fork/audios/ntr_telugu_2min.mp3', "test3.wav", '/Users/niteshreddymusukula/rvc_project/Mangio-RVC-Fork/logs/added_IVF598_Flat_nprobe_1_niteshbetter_v2.index')
+    cli_infer(
+        "niteshbetter_e90_s1890.pth",
+        "/Users/niteshreddymusukula/rvc_project/Mangio-RVC-Fork/audios/ntr_telugu_2min.mp3",
+        "test3.wav",
+        "/Users/niteshreddymusukula/rvc_project/Mangio-RVC-Fork/logs/added_IVF598_Flat_nprobe_1_niteshbetter_v2.index",
+    )
 
 
 def cli_navigation_loop():
@@ -1839,6 +1842,6 @@ if config.is_cli:
     print(
         "Welcome to the CLI version of RVC. Please read the documentation on https://github.com/Mangio621/Mangio-RVC-Fork (README.MD) to understand how to use this app.\n"
     )
-    #cli_navigation_loop()
+    # cli_navigation_loop()
 
 # endregion
